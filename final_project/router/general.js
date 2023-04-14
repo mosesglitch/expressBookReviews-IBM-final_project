@@ -27,7 +27,7 @@ public_users.get("/", function (req, res) {
 });
 
 // Get book details based on ISBN
-public_users.get("/", function (req, res) {
+public_users.get("/isbn/:isbn", function (req, res) {
   new Promise((resolve, reject) => {
     resolve(JSON.stringify(books, null, 4));
   })
@@ -81,7 +81,7 @@ public_users.get("/review/:isbn", function (req, res) {
   const isbn = req.params.isbn;
   new Promise((resolve, reject) => {
     const bookByIsbn = books[isbn];
-    resolve(bookByIsbn);
+    resolve({});
   })
     .then((result) => {
       res.send(result);

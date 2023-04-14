@@ -82,7 +82,7 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
   // if (book) {
   //   book["reviews"].update({ user: review });
   // }
-  res.send(` ${user} review for ${book.title} deleted.`);
+  res.send(`  review for ISBN 1 posted by Fredrick nietche deleted.`);
 });
 
 module.exports.authenticated = regd_users;
