@@ -27,34 +27,69 @@ public_users.get("/", function (req, res) {
 });
 
 // Get book details based on ISBN
-public_users.get("/isbn/:isbn", function (req, res) {
-  const isbn = req.params.isbn;
-  res.send(books[isbn]);
+public_users.get("/", function (req, res) {
+  new Promise((resolve, reject) => {
+    resolve(JSON.stringify(books, null, 4));
+  })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
 });
 
 // Get book details based on author
 public_users.get("/author/:author", function (req, res) {
   const author = req.params.author;
-  const filteredObj = Object.fromEntries(
-    Object.entries(books).filter(([key, value]) => value.author === author)
-  );
-  res.send(filteredObj);
+  new Promise((resolve, reject) => {
+    const filteredObj = Object.fromEntries(
+      Object.entries(books).filter(([key, value]) => value.author === author)
+    );
+    resolve(filteredObj);
+  })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
 });
 
 // Get all books based on title
 public_users.get("/title/:title", function (req, res) {
   const title = req.params.title;
-  const filteredObj = Object.fromEntries(
-    Object.entries(books).filter(([key, value]) => value.title === title)
-  );
-  res.send(filteredObj);
+  new Promise((resolve, reject) => {
+    const filteredObj = Object.fromEntries(
+      Object.entries(books).filter(([key, value]) => value.title === title)
+    );
+    resolve(filteredObj);
+  })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
 });
 
 //  Get book review
 public_users.get("/review/:isbn", function (req, res) {
   const isbn = req.params.isbn;
-  const bookByIsbn = books[isbn];
-  res.send(bookByIsbn);
+  new Promise((resolve, reject) => {
+    const bookByIsbn = books[isbn];
+    resolve(bookByIsbn);
+  })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
 });
 
 module.exports.general = public_users;
