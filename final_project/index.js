@@ -25,11 +25,14 @@ app.use("/customer/auth/*", function auth(req, res, next) {
         req.user = user;
         next();
       } else {
+        next();
         return res.status(403).json({ message: "User not authenticated" });
       }
     });
   } else {
+    next();
     return res.status(403).json({ message: "User not logged in" });
+    // next();
   }
 });
 
@@ -37,5 +40,6 @@ const PORT = 5000;
 
 app.use("/customer", customer_routes);
 app.use("/", genl_routes);
+app;
 
-app.listen(PORT, () => console.log("Server is running"));
+app.listen(PORT, () => console.log(`Server is running on ${PORT}`));
